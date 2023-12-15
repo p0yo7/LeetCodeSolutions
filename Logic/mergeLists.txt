@@ -1,0 +1,6 @@
+Se tienen 2 listas de Nodos 
+Se crea el result y el auxiliar
+Se va ciclando entre todos los list1 y list2 nodes
+Se verifica que no sea nullptr el ->next 
+Se avanza de en el list menor y se compara con list mayor hasta encontrar un valor mayor (se van agregando los valores a temp)
+Se invierten el list menor con el mayor 

@@ -1,46 +1,38 @@
-/******************************************************************************
-
-                              Online C++ Compiler.
-               Code, Compile, Run and Debug C++ program online.
-Write your code in this editor and press "Run" button to compile and execute it.
-
-*******************************************************************************/
-
-#include <iostream>
-#include <vector>
-
-using namespace std;
 struct Letter {
     char letter;
     int frequency;
-    Letter(char l, int f){
-        letter = l;
-        frequency = f;
-    }
+    Letter(char l, int f) : letter(l), frequency(f) {}
 };
+
+bool compareFrequency(const Letter& a, const Letter& b) {
+    return a.frequency > b.frequency;
+}
 
 class Solution {
 public:
     string frequencySort(string s) {
         vector<Letter> words;
-        for (int i = 0; i < s.size(); i++){
-            for (int j = 0; j < words.size(); j++){
-                if ( j+1 >= words.size()){
-                    Letter newLetter(s[i], 1);
-                    words.push_back(newLetter);
+        string result = "";
+        for (int i = 0; i < s.size(); i++) {
+            bool found = false;
+            for (int j = 0; j < words.size(); j++) {
+                if (words[j].letter == s[i]) {
+                    words[j].frequency++;
+                    found = true;
+                    break;
                 }
             }
-            cout << s[i] << endl;
+            if (!found) {
+                Letter newLetter(s[i], 1);
+                words.push_back(newLetter);
+            }
         }
-        return "";
+        sort(words.begin(), words.end(), compareFrequency);
+        for (int i = 0; i < words.size(); i++) {
+            for(int j = 0; j < words[i].frequency; j++){
+                result += words[i].letter;
+            }
+        }
+        return result;
     }
 };
-
-int main()
-{
-    Solution sol;
-    string word = "tree";
-    sol.frequencySort(word);
-
-    return 0;
-}

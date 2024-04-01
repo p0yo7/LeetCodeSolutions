@@ -18,3 +18,26 @@ public:
         return result.length();
     }
 };
+
+class Solution {
+public:
+    int lengthOfLastWord(string s) {
+        int size_string = s.size();
+        int i = size_string-1;
+        int word_size = 0;
+        for (; i >= 0; i--){
+            if (s[i] == ' '){
+                if (word_size == 0) {
+                    continue;
+                }
+                else if (word_size > 0) {
+                    break;
+                }
+            }
+            else {
+                word_size++;
+            }
+        }
+        return word_size;
+    }
+};
